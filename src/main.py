@@ -1,6 +1,5 @@
 import random
 
-
 class Card:
     __card_number: str
     __card_owner: str

@@ -1,5 +1,3 @@
-import services
-
-database_context = services.DatabaseContext()
+import models
 
 print("Database was created!");

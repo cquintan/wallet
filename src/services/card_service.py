@@ -12,10 +12,16 @@ class CardService():
 
     ## create a function to add a card
     def add_card(self, card):
-        with Session(autoflush=False, bind=self.__database_context.database_engine) as db:      #connect to the database
-            db.add(card)        #add card details
-            db.commit()         # card data is sent to the database
+        # connect to the database
+        with Session(autoflush=False, bind=self.__database_context.database_engine) as db:
+            # add card details
+            db.add(card)
+            # card data is sent to the database
+            db.commit()
 
-    def get_all_cards(self):        #create a function to get all data of cards
-        with Session(autoflush=False, bind=self.__database_context.database_engine) as db:      #connect to the database
-            return db.query(models.Card).all()      #all card data output
+    # create a function to get all data of cards
+    def get_all_cards(self):
+        # connect to the database
+        with Session(autoflush=False, bind=self.__database_context.database_engine) as db:
+            # all card data output
+            return db.query(models.Card).all()

@@ -4,7 +4,7 @@
 ## @brief Using types to work with orm.
 from sqlalchemy import Column, Integer, String
 ## @brief Using base model.
-from .base import Base
+from . import Base
 
 ## @brief Bank account
 #  @details Bank account - this is the user's account number, bank cards can be linked to this account.

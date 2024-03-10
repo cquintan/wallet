@@ -4,12 +4,12 @@
 ## @brief Using types to work with orm.
 from sqlalchemy import Column, Integer, String
 ## @brief Using base model.
-from . import Base
+from . import base
 
 ## @brief Bank account
 #  @details Bank account - this is the user's account number, bank cards can be linked to this account.
 #  <br />Bank account is inherited from the base model.
-class BankAccount(Base):
+class BankAccount(base.Base):
     ## @brief Database table name.
     __tablename__ = "BankAccount"
     ## @brief Primary key for indexing in the database.

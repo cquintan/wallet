@@ -1,4 +1,4 @@
-import models
-from .database_context import DatabaseContext
-from .card_service import CardService
-from .transaction_service import TransactionService
+import src.services.bank_account_service
+import src.services.card_service
+import src.services.database_context
+import src.services.transaction_service

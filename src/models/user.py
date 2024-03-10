@@ -4,12 +4,12 @@
 ## @brief Using types to work with orm.
 from sqlalchemy import Column, Integer, String
 ## @brief Using base model.
-from . import Base
+from . import base
 
 ## @brief User
 #  @details User is user data that can be linked bank cards.
 #  <br />The user is inherited from the base model..
-class User(Base):
+class User(base.Base):
     ## @brief Database table name.
     __tablename__ = "User"
     ## @brief Primary key for indexing in the database.

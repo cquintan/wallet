@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, Float, String
-from .base import Base
+from . import base
 
-class Card(Base):
+class Card(base.Base):
     __tablename__ = "Card"
     id = Column(Integer, primary_key=True, index=True)
     card_number = Column(String)

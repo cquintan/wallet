@@ -6,9 +6,11 @@ from sqlalchemy import Column, Integer, Float, String, DateTime, Enum
 ## @brief Using base model.
 from . import TransactionStatus
 ## @brief Using base model.
+from . import TransactionType
+## @brief Using base model.
 from . import Base
 
-# @brief Transaction
+## @brief Transaction
 #  @details Transactions are the main types of operations on the user's account, thanks to them it is possible to analyze expenses and income, as well as to work with the user's account to add and deduct funds from the account.
 #  <br />Transactions are inherited from the base model.
 class Transaction(Base):
@@ -25,7 +27,7 @@ class Transaction(Base):
     ## @brief Date and time of the card transaction made.
     transaction_date_time = Column(DateTime)
     ## @brief Transaction type, spend category and enrollment category.
-    transaction_type = Column(String)
+    transaction_type = Column(Enum())
     ## @brief Who is the recipient and sender on the transaction.
     recipient_sender = Column(String)
 

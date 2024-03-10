@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 ## @brief Using the service to work with the database.
 from . import DatabaseContext
 ## @brief Using Transaction model.
-from .models import Transaction
+import models.transaction
 
 ## @brief Transaction handling service.
 #  @details Adding transactions to the database, using transaction data it is possible to create a history of bank operations.
@@ -22,7 +22,7 @@ class TransactionService():
     #  @param[in] transaction The Transaction class instance.
     def add_transaction(self, transaction):
         ## @brief Check that the transaction parameter is an instance of the Transaction class.
-        if isinstance(transaction, Transaction):
+        if isinstance(transaction, models.transaction.Transaction):
             ## @brief Creating a session to work to the database.
             #  @arg @c autoflush Automatic synchronisation of sessions with the database.
             #  @arg @c bind Link to the database core.
@@ -31,6 +31,8 @@ class TransactionService():
                 db.add(transaction)
                 ## @brief Sending all queries to the database for execution.
                 db.commit()
+                return True
+        return False
 
     ## @brief Sending all queries to the database for execution.
     def get_all_transactions(self):

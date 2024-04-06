@@ -15,18 +15,20 @@ import hashlib
 class UserService():
     ## @brief The constructor.
     #  @param[in] self The object pointer.
+
     def __init__(self):
         ## @brief Database instance for working with the database.
         self.__database_context = database_context.DatabaseContext()
-    def __chec_user__(self,  login, password):
-        ret = Session.query(exists().where(user.field == value)).scalar()
+    def __chec_user__(self, user):
+        ret = Session.query(exists().where(user.login == login, user.password == password)).scalar()
         if ret == True:
             pass
+
     ## @brief Adding a registration class instance to the database.
     #  @param[in] self The object pointer.
     #  @param[in] user The User class instance.
-    def add_user(self, login, password):
-        us = user.User(login=login, password=hashlib.sha3_512(f'{password}'.encode('utf-8')).hexdigest())
+    def add_user(self, user):
+        user_password_login = user.User(login=login, password=hashlib.sha3_512(f'{password}'.encode('utf-8')).hexdigest())
         ## @brief Creating a session to work to the database.
         #  @arg @c autoflush Automatic synchronisation of sessions with the database.
         #  @arg @c bind Link to the database core.
@@ -37,6 +39,7 @@ class UserService():
             db.commit()
             return True
         return False
+
     ## @brief Sending all queries to the database for execution.
     def get_all_users(self):
         ## @brief Creating a session to work to the database.

@@ -33,9 +33,9 @@ class TestUserService():
     #  @param[in] Fixture to clear the User table of logins and passwords added during the test.
     def test_add_user(self, user_table_cleanup):
         ## @brief Create a password for the test.
-        sample_password = "2200quwhuasd"
+        sample_password = "sample-password"
         ## @brief Create a login for the test.
-        sample_login = "Ne_Twou_afajfhabf"
+        sample_login = "sample-login"
 
         ## @brief Database instance for working with the database.
         sample_user_service = services.user_service.UserService()
@@ -47,16 +47,14 @@ class TestUserService():
     #  @param[in] Fixture to clear the User table of logins and passwords added during the test.
     def test_get_all_user(self, user_table_cleanup):
         ## @brief Create a password for the test.
-        sample_password = "2200quwhuasd"
+        sample_password = "sample-password"
         ## @brief Create a login for the test.
-        sample_login = "Ne_Twou_afajfhabf"
+        sample_login = "sample-login"
 
         ## @brief Database instance for working with the database.
         sample_user_service = services.user_service.UserService()
         ## @brief Pass the test login and test password to the database.
         sample_user_service.add_user(sample_login, sample_password)
-
-        
         sample_user = sample_user_service.get_all_users()
         assert sample_login == sample_user[0].login
 

@@ -19,10 +19,12 @@ class UserService():
     def __init__(self):
         ## @brief Database instance for working with the database.
         self.__database_context = database_context.DatabaseContext()
-    def __chec_user__(self, user):
+
+    def __check_user__(self, user):
         comparison = Session.query(exists().where(user.login == login, user.password == password)).scalar()
-        if comparison == True:
-            pass
+        if comparison != None:
+            return True
+        return False
 
     ## @brief Adding a registration class instance to the database.
     #  @param[in] self The object pointer.
@@ -35,11 +37,10 @@ class UserService():
         #  @arg @c bind Link to the database core.
         with Session(autoflush=False, bind=self.__database_context.database_engine) as db:
             ## @brief Creating a request to add a user to the database.
-            db.add(us)
+            db.add(user_password_login)
             ## @brief Sending all queries to the database for execution.
             db.commit()
             return True
-        return False
 
     ## @brief Sending all queries to the database for execution.
     def get_all_users(self):

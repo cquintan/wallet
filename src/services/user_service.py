@@ -29,6 +29,7 @@ class UserService():
     #  @param[in] user The User class instance.
     def add_user(self, login, password):
         user_password_login = user.User(login=login, password=hashlib.sha3_512(f'{password}'.encode('utf-8')).hexdigest())
+
         ## @brief Creating a session to work to the database.
         #  @arg @c autoflush Automatic synchronisation of sessions with the database.
         #  @arg @c bind Link to the database core.

@@ -20,14 +20,14 @@ class UserService():
         ## @brief Database instance for working with the database.
         self.__database_context = database_context.DatabaseContext()
     def __chec_user__(self, user):
-        ret = Session.query(exists().where(user.login == login, user.password == password)).scalar()
-        if ret == True:
+        comparison = Session.query(exists().where(user.login == login, user.password == password)).scalar()
+        if comparison == True:
             pass
 
     ## @brief Adding a registration class instance to the database.
     #  @param[in] self The object pointer.
     #  @param[in] user The User class instance.
-    def add_user(self, user):
+    def add_user(self, login, password):
         user_password_login = user.User(login=login, password=hashlib.sha3_512(f'{password}'.encode('utf-8')).hexdigest())
         ## @brief Creating a session to work to the database.
         #  @arg @c autoflush Automatic synchronisation of sessions with the database.

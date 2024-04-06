@@ -32,10 +32,10 @@ class TestUserService():
     #  @param[in] self The object pointer.
     #  @param[in] Fixture to clear the User table of logins and passwords added during the test.
     def test_add_user(self, user_table_cleanup):
-        ## @brief Create a password for the test.
-        sample_password = "sample-password"
         ## @brief Create a login for the test.
         sample_login = "sample-login"
+        ## @brief Create a password for the test.
+        sample_password = "sample-password"
 
         ## @brief Database instance for working with the database.
         sample_user_service = services.user_service.UserService()
@@ -46,10 +46,10 @@ class TestUserService():
     #  @param[in] self The object pointer.
     #  @param[in] Fixture to clear the User table of logins and passwords added during the test.
     def test_get_all_user(self, user_table_cleanup):
-        ## @brief Create a password for the test.
-        sample_password = "sample-password"
         ## @brief Create a login for the test.
         sample_login = "sample-login"
+        ## @brief Create a password for the test.
+        sample_password = "sample-password"
 
         ## @brief Database instance for working with the database.
         sample_user_service = services.user_service.UserService()

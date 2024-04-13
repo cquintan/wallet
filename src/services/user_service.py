@@ -10,7 +10,7 @@ from ..models import user
 ## @brief Using the hashing library.
 import hashlib
 
-## @brief Registration handling service.
+## @brief Registration service.
 #  @details By adding users to the database, whose logins and passwords can be used to personalize access to bank card data and account history.
 class UserService():
     ## @brief The constructor.

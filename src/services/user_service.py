@@ -9,6 +9,7 @@ from . import database_context
 from ..models import user
 ## @brief Using the hashing library.
 import hashlib
+from sqlalchemy.sql import exists
 
 ## @brief Registration service.
 #  @details By adding users to the database, whose logins and passwords can be used to personalize access to bank card data and account history.
@@ -20,11 +21,19 @@ class UserService():
         ## @brief Database instance for working with the database.
         self.__database_context = database_context.DatabaseContext()
 
-    def __check_user__(self, user):
-        comparison = Session.query(exists().where(user.login == login, user.password == password)).scalar()
-        if comparison != None:
-            return True
-        return False
+    ## @brief Check user data and data stored in the database.
+    # @param[in] self Object pointer.
+    # @param[in] audited_user Data of the audited user.
+    def __check_user(self, audited_user):
+        ## @brief Creating a session to work to the database.
+        #  @arg @c autoflush Automatic synchronisation of sessions with the database.
+        #  @arg @c bind Link to the database core.
+        with Session(autoflush=False, bind=self.__database_context.database_engine) as db:
+            ## @brief The comparison variable stores the results of comparing user data with data stored in the database.
+            comparison = db.query(exists().where(user.User.login == audited_user.login,
+                                                 user.User.password == audited_user.password)).scalar()
+            return bool(comparison)
+
 
     ## @brief Adding a registration class instance to the database.
     #  @param[in] self The object pointer.
@@ -50,3 +59,10 @@ class UserService():
         with Session(autoflush=False, bind=self.__database_context.database_engine) as db:
             ## @brief Get all users.
             return db.query(user.User).all()
+
+    ## @brief Create a function to authorize a user.
+    #  @param[in] self The object pointer.
+    #  @param[in] user The User class instance.
+    def login_user(self, login, password):
+        my_user = user.User(login=login, password=hashlib.sha3_512(f'{password}'.encode('utf-8')).hexdigest())
+        return self.__check_user(my_user)

@@ -21,11 +21,15 @@ class UserService():
         ## @brief Database instance for working with the database.
         self.__database_context = database_context.DatabaseContext()
 
+    ## @brief Check user data and data stored in the database.
+    # @param[in] self Object pointer.
+    # @param[in] audited_user Data of the audited user.
     def __check_user(self, audited_user):
         ## @brief Creating a session to work to the database.
         #  @arg @c autoflush Automatic synchronisation of sessions with the database.
         #  @arg @c bind Link to the database core.
         with Session(autoflush=False, bind=self.__database_context.database_engine) as db:
+            ## @brief The comparison variable stores the results of comparing user data with data stored in the database.
             comparison = db.query(exists().where(user.User.login == audited_user.login,
                                                  user.User.password == audited_user.password)).scalar()
             return bool(comparison)

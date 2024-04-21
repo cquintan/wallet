@@ -67,18 +67,11 @@ class TestUserService():
         ## @brief Create a password for the test.
         sample_password = "sample-password"
 
-    def test_login_user(self, user_table_cleanup):
-        ## @brief Create a login for the test.
-        sample_login = "sample-login"
-        ## @brief Create a password for the test.
-        sample_password = "sample-password"
-
         ## @brief Database instance for working with the database.
         sample_user_service = services.user_service.UserService()
-        # Добавление тестового пользователя в базу данных
+        ## @brief Adding a test user to the database.
         sample_user_service.add_user(sample_login, sample_password)
-
-        # Попытка входа с тестовыми учетными данными
+        ## @brief Attempting to log in with test credentials.
         assert sample_user_service.login_user(sample_login, sample_password) == True
 
 if __name__ == "__main__":
